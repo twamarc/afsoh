@@ -1,0 +1,85 @@
+-- Minimal starter schema (MySQL 8, utf8mb4)
+CREATE DATABASE IF NOT EXISTS app CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE app;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(100) UNIQUE NOT NULL,
+  passwd VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  status TINYINT NOT NULL DEFAULT 0,
+  confirmed TINYINT NOT NULL DEFAULT 0,
+  code VARCHAR(64),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS members (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  surname VARCHAR(100),
+  middlename VARCHAR(100),
+  name VARCHAR(100),
+  title VARCHAR(50),
+  job VARCHAR(150),
+  institution VARCHAR(255),
+  country VARCHAR(100),
+  city VARCHAR(100),
+  phone VARCHAR(50),
+  fax VARCHAR(50),
+  address VARCHAR(255),
+  zip VARCHAR(20),
+  newsletter TINYINT DEFAULT 0,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS conference (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  year INT NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  location VARCHAR(255),
+  start_date DATE,
+  end_date DATE,
+  registration_open TINYINT DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS conference_users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  conference_id INT NOT NULL,
+  user_id INT NOT NULL,
+  category VARCHAR(100),
+  accommodation TINYINT DEFAULT 0,
+  registration TINYINT DEFAULT 0,
+  paid TINYINT DEFAULT 0,
+  amount DECIMAL(10,2) DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (conference_id) REFERENCES conference(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS abstracts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  conference_id INT NOT NULL,
+  user_id INT NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  authors TEXT,
+  affiliations TEXT,
+  body TEXT,
+  status VARCHAR(50) DEFAULT 'submitted',
+  submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (conference_id) REFERENCES conference(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS news (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  date DATE,
+  message MEDIUMTEXT
+);
+
+CREATE TABLE IF NOT EXISTS downloads (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  filepath VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

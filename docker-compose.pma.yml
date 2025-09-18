@@ -1,0 +1,11 @@
+﻿version: "3.9"
+services:
+  pma:
+    image: phpmyadmin:5
+    environment:
+      PMA_HOST: db
+      PMA_ARBITRARY: 1
+    ports:
+      - "8081:80"
+    depends_on:
+      - db

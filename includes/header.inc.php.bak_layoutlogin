@@ -1,0 +1,41 @@
+<?php
+/* PUBLIC_HEADER_CANONICAL */
+if (function_exists('ob_get_level') && ob_get_level() === 0) { ob_start(); }
+$islogin    = isset($islogin) ? (bool)$islogin
+           : ((isset($login) && is_object($login) && method_exists($login,'isLogin')) ? $login->isLogin() : false);
+$page_title = $page_title ?? 'Home';
+?>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title><?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/style.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="/css/styletiny.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="/css/lightbox.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="/css/blinking.css?v=<?= time() ?>">
+</head>
+<body>
+<header class="site-header" style="padding:10px 0;border-bottom:1px solid #eee;">
+  <div class="container" style="max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:16px;">
+    <a class="brand" href="/" style="font-weight:bold;text-decoration:none;">AFSOH</a>
+    <nav class="site-nav" style="display:flex;gap:12px;">
+      <a href="/" style="text-decoration:none;">Home</a>
+      <a href="/conferences.php" style="text-decoration:none;">Conferences</a>
+      <a href="/membership.php" style="text-decoration:none;">Membership</a>
+      <a href="/contact.php" style="text-decoration:none;">Contact</a>
+      <a href="/admin/login.php" style="text-decoration:none;">Admin</a>
+    </nav>
+<!-- AUTH_ACTIONS_START -->
+<div class="auth-actions" style="margin-left:auto;display:flex;gap:12px;align-items:center;">
+  <?php if (!empty($islogin)) : ?>
+    <a href="/logout.php" style="text-decoration:none;">Logout</a>
+  <?php else: ?>
+    <a href="/login.php" style="text-decoration:none;">Login</a>
+    <a href="#" id="open-login" style="text-decoration:none;">Quick login</a>
+  <?php endif; ?>
+</div>
+<!-- AUTH_ACTIONS_END -->
+  </div>
+</header>

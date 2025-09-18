@@ -1,0 +1,44 @@
+
+<?php
+
+// Ensure $login is defined and usable (PHP 8 safe)
+if (!isset($login) || !is_object($login)) {
+    if (class_exists('Login')) {
+        if (method_exists('Login', 'getInstance')) {
+            try {
+                // Prefer instance-style singleton for PHP 8 compatibility
+                $login = (new Login())->getInstance();
+            } catch (Throwable $e) {
+                // Fallback: at least provide a Login object if constructor exists
+                try { $login = new Login(); } catch (Throwable $e2) { $login = null; }
+            }
+        } else {
+            try { $login = new Login(); } catch (Throwable $e3) { $login = null; }
+        }
+    } else {
+        $login = null;
+    }
+}
+$isLoggedIn = (is_object($login) && method_exists($login, 'isLogin')) ? ($login?->isLogin() ?? false) : false;
+?>
+<?php 
+require_once __DIR__ . '/bootstrap.php'; ?>
+if ($page_name=="conferences" || $page_name=="membership")
+	echo "</div>\n";
+?>
+</div>
+<div id="footer">
+	<p><a href="contact.php">contact</a>  -   
+<?php
+<?php require_once __DIR__ . '/bootstrap.php'; ?>
+if($islogin!=true && ($login?->isLogin() ?? false)==true) 
+	echo "<a href=\"admin/index.php\">administration</a>";
+else
+	echo "<a href=\"admin/login.php\">administration</a>";
+?>  -   <a href="https://my.easyhost.be/en/home">EasyHost Dashboard</a> - <a href="https://webmail.easyhost.be/">Staff Internal E-mail System</a></p>
+	<p>Copyright (c) <?= date('Y',time()); ?> | afsoh.com | All rights reserved</p>
+</div>
+</body>
+</html>
+
+

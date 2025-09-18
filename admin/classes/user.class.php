@@ -1,0 +1,864 @@
+<?php
+
+
+class User {
+
+	var $username;
+	var $passwd;
+	var $email;
+	var $date;
+	var $status = 0;
+	var $confirmed = false;
+	var $code;
+	var $usertable;
+	var $id;
+	var $surname;
+	var $middlename;
+	var $familyname;
+	var $title;
+	var $institution;
+	var $address;
+	var $country;
+	var $phone;
+	var $fax;
+	var $paid = false;
+	var $paymentCode;
+	var $travel;
+	var $traveltext;
+	var $accommodation;
+	var $accommodationtext;
+	var $registration;
+	var $registrationtext;
+	var $comments;
+	
+	
+	function getName() {
+		if($this->getSurname()=="")
+			$name = $this->getUsername();
+		else
+			$name = $this->getSurname()." ".$this->getMiddlename()." ".$this->getFamilyname();
+			
+		return $name;
+	}
+	function getUsername() {
+		return $this->username;
+	}
+	function getPasswd() {
+		return $this->passwd;
+	}
+	function getEmail() {
+		return $this->email;
+	}
+	function getDate() {
+		return $this->date;
+	}
+	function getStatus() {
+		return $this->status;
+	}
+	function isConfirmed() {
+		return $this->confirmed;
+	}
+	function getCode() {
+		return $this->code;
+	}
+	function getUsertable() {
+		return $this->usertable;
+	}
+	function getId() {
+		return $this->id;
+	}
+	
+	function setId($id) {
+		$this->id = $id;
+	}
+	
+	function setUsername($username) {
+		$this->username = $username;
+	}
+	function setPasswd($passwd) {
+		$this->passwd = md5($passwd);
+	}
+	function setEmail($email) {
+		$this->email = $email;
+	}
+	function setDate($date) {
+		$this->date = $date;
+	}
+	function setStatus($status) {
+		$this->status = $status;
+	}
+	function setConfirmed($confirmed) {
+		$this->confirmed = $confirmed;
+	}
+	function setCode($code) {
+		$this->code = $code;
+	}
+	function setUsertable($usertable) {
+		$this->usertable = $usertable;
+	}
+	
+	
+	function getSurname() {
+		return $this->surname;
+	}
+	function setSurname($surname) {
+		$this->surname = $surname;
+	}
+	function getMiddlename() {
+		return $this->middlename;
+	}
+	function setMiddlename($middlename) {
+		$this->middlename = $middlename;
+	}
+	function getFamilyname() {
+		return $this->familyname;
+	}
+	function setFamilyname($familyname) {
+		$this->familyname = $familyname;
+	}
+	function getTitle() {
+		return $this->title;
+	}
+	function setTitle($title) {
+		$this->title = $title;
+	}
+	function getInstitution() {
+		return $this->institution;
+	}
+	function setInstitution($institution) {
+		$this->institution = $institution;
+	}
+	function getAddress() {
+		return $this->address;
+	}
+	function setAddress($address) {
+		$this->address = $address;
+	}
+	function getCountry() {
+		return $this->country;
+	}
+	function setCountry($country) {
+		$this->country = $country;
+	}
+	function getPhone() {
+		return $this->phone;
+	}
+	function setPhone($phone) {
+		$this->phone = $phone;
+	}
+	function getFax() {
+		return $this->fax;
+	}
+	function setFax($fax) {
+		$this->fax = $fax;
+	}
+	function hasPaid() {
+		return $this->paid;
+	}
+	function setPaid($paid) {
+		$this->paid = $paid;
+	}
+	function getPaymentCode() {
+		return $this->paymentCode;
+	}
+	function setPaymentCode($paymentCode) {
+		$this->paymentCode = $paymentCode;
+	}
+	
+	function getTravel() {
+		return $this->travel;
+	}
+	function setTravel($travel) {
+		$this->travel = $travel;
+	}
+	function getTraveltext() {
+		return $this->traveltext;
+	}
+	function setTraveltext($traveltext) {
+		$this->traveltext = $traveltext;
+	}
+	function getAccommodation() {
+		return $this->accommodation;
+	}
+	function setAccommodation($accommodation) {
+		$this->accommodation = $accommodation;
+	}
+	function getAccommodationtext() {
+		return $this->accommodationtext;
+	}
+	function setAccommodationtext($accommodationtext) {
+		$this->accommodationtext = $accommodationtext;
+	}
+	function getRegistration() {
+		return $this->registration;
+	}
+	function setRegistration($registration) {
+		$this->registration = $registration;
+	}
+	function getRegistrationtext() {
+		return $this->registrationtext;
+	}
+	function setRegistrationtext($registrationtext) {
+		$this->registrationtext = $registrationtext;
+	}
+	function getComments() {
+		return $this->comments;
+	}
+	function setComments($comments) {
+		$this->comments = $comments;
+	}
+	
+	
+	
+	function hasStatus($status) {
+		return $status<=$this->status;
+	}
+	
+	
+	
+	function save() {
+		global $db;
+		
+		$this->setCode(sha1(md5(microtime()*rand(1,10))));
+		$this->setPaymentCode(sha1(md5(microtime()*rand(1,10))));
+		$date = date("Y-m-d",time());
+
+		$sql = "INSERT INTO ". $this->usertable ." (username, passwd, email, date, status, confirmed, code, surname, middlename, familyname, title, institution, address, country, phone, fax, paid, paymentcode, travel, traveltext, accommodation, accommodationtext, registration, registrationtext, comments) VALUES (\"". $this->username ."\",\"". $this->passwd ."\",\"". $this->email ."\",\"". $date ."\",\"". $this->status ."\",\"". $this->confirmed ."\",\"". $this->code ."\",\"". $this->surname ."\",\"". $this->middlename ."\",\"". $this->familyname ."\",\"". $this->title ."\",\"". $this->institution ."\",\"". $this->address ."\",\"". $this->country ."\",\"". $this->phone ."\",\"". $this->fax ."\",\"". $this->paid ."\",\"". $this->paymentCode ."\",\"". $this->travel ."\",\"". $this->traveltext ."\",\"". $this->accommodation ."\",\"". $this->accommodationtext ."\",\"". $this->registration ."\",\"". $this->registrationtext ."\",\"". $this->comments ."\")";
+		$result = $db->query($sql);
+		if (DB::isError($result)) {
+    		die ($result->getMessage());
+		}
+		
+		$this->id = $db->getOne("SELECT id FROM ". $this->usertable ." WHERE username='".$this->username."' and passwd='".$this->passwd."' and code='".$this->code."'");
+		return true;
+	}
+	
+	
+	function update() {
+		global $db;
+		
+		if($this->id!="") {
+			$date = ereg_replace("(.*)/(.*)/(.*)","\\3-\\2-\\1",$this->date);
+			$sql = "UPDATE  ". $this->usertable ." SET username = '". addslashes($this->username) ."' , passwd = '". $this->passwd ."' , email = '". $this->email ."' , date = '". $date ."' , status = '". $this->status ."' , confirmed = '". $this->confirmed ."' , code = '". $this->code ."',surname='".$this->surname."', middlename='".$this->middlename."', familyname='".$this->familyname."', title='".$this->title."', institution='".$this->institution."', address='".$this->address."', country='".$this->country."', phone='".$this->phone."', fax='".$this->fax."', paid='".$this->paid."', paymentcode='".$this->paymentCode."', travel='".$this->travel."', traveltext='".$this->traveltext."', accommodation='".$this->accommodation."', accommodationtext='".$this->accommodationtext."', registration='".$this->registration."', registrationtext='".$this->registrationtext."', comments='".$this->comments."'  WHERE id=".$this->id."";
+			$result = $db->query($sql);
+			if (DB::isError($result)) {
+				die ($result->getMessage());
+			}
+		}
+
+	}
+	
+	function updatePaymentCode() {
+		global $db;
+		
+		if($this->id!="") {
+			$date = ereg_replace("(.*)/(.*)/(.*)","\\3-\\2-\\1",$this->date);
+			$sql = "UPDATE  ". $this->usertable ." SET paymentcode='".$this->paymentCode."'  WHERE id=".$this->id."";
+			$result = $db->query($sql);
+			if (DB::isError($result)) {
+				die ($result->getMessage());
+			}
+		}
+
+	}
+	
+	function delete() {
+		global $db;
+		
+		if($this->id!="") {
+			$sql = "DELETE FROM ". $this->usertable ." WHERE id=".$this->id."";
+			$result = $db->query($sql); 
+			if (DB::isError($result)) {
+    			die ($result->getMessage());
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	function validId() {
+		global $db;
+		
+		$numrows = $db->getOne("SELECT count(*) FROM ". $this->usertable ." WHERE id=".$this->id);
+		
+		if($numrows==1)
+			return true;
+		else
+			return false;
+	}
+	
+	function validUsername() {
+		global $db;
+		
+		$numrows = $db->getOne("SELECT count(*) FROM ". $this->usertable ." WHERE username='".$this->username."'");
+		
+		if($numrows==1)
+			return true;
+		else
+			return false;
+	}
+	
+	function validCode() {
+		global $db;
+		
+		$numrows = $db->getOne("SELECT count(*) FROM ". $this->usertable ." WHERE code='".$this->code."'");
+		
+		if($numrows==1)
+			return true;
+		else
+			return false;
+	}
+	
+	function validPaymentCode() {
+		global $db;
+		
+		$numrows = $db->getOne("SELECT count(*) FROM ". $this->usertable ." WHERE paymentcode='".$this->paymentCode."'");
+		
+		if($numrows==1)
+			return true;
+		else
+			return false;
+	}
+	
+	function initById($id,$usertable) {
+		global $db;
+		 
+		$this->setId($id);
+		$this->setUsertable($usertable);
+		
+		if($this->id==null || $this->validId()==false)
+			return false;
+		$sql = "SELECT id, username, passwd, email, DATE_FORMAT(date, '%d/%m/%Y'), status, confirmed, code,surname, middlename, familyname, title, institution, address, country, phone, fax, paid, paymentcode, travel, traveltext, accommodation, accommodationtext, registration, registrationtext, comments FROM ".$this->usertable." WHERE id=".$this->id;
+		$row = $db->getRow($sql);
+		if (DB::isError($row)) {
+			die ($row->getMessage());
+		}
+		
+		$this->setUsername($row[1]);
+		$this->passwd = $row[2];
+		$this->setEmail($row[3]);
+		$this->setDate($row[4]);
+		$this->setStatus($row[5]);
+		$this->setConfirmed($row[6]);
+		$this->setCode($row[7]);
+		$this->setSurname($row[8]);
+		$this->setMiddlename($row[9]);
+		$this->setFamilyname($row[10]);
+		$this->setTitle($row[11]);
+		$this->setInstitution($row[12]);
+		$this->setAddress($row[13]);
+		$this->setCountry($row[14]);
+		$this->setPhone($row[15]);
+		$this->setFax($row[16]);
+		$this->setPaid($row[17]);
+		$this->setPaymentCode($row[18]);
+		$this->setTravel($row[19]);
+		$this->setTraveltext($row[20]);
+		$this->setAccommodation($row[21]);
+		$this->setAccommodationtext($row[22]);
+		$this->setRegistration($row[23]);
+		$this->setRegistrationtext($row[24]);
+		$this->setComments($row[25]);
+		
+		
+		return true;
+	}
+	
+	function initByUsername($username,$usertable) {
+		global $db;
+		 
+		$this->setUsername($username);
+		$this->setUsertable($usertable);
+		
+		if($this->username==null || $this->validUsername()==false)
+			return false;
+		$sql = "SELECT id, username, passwd, email, DATE_FORMAT(date, '%d/%m/%Y'), status, confirmed, code,surname, middlename, familyname, title, institution, address, country, phone, fax, paid, paymentcode, travel, traveltext, accommodation, accommodationtext, registration, registrationtext, comments FROM ".$this->usertable." WHERE username='".$this->username."'";
+		$row = $db->getRow($sql);
+		if (DB::isError($row)) {
+			die ($row->getMessage());
+		}
+		
+		$this->setId($row[0]);
+		$this->setUsername($row[1]);
+		$this->passwd = $row[2];
+		$this->setEmail($row[3]);
+		$this->setDate($row[4]);
+		$this->setStatus($row[5]);
+		$this->setConfirmed($row[6]);
+		$this->setCode($row[7]);
+		$this->setSurname($row[8]);
+		$this->setMiddlename($row[9]);
+		$this->setFamilyname($row[10]);
+		$this->setTitle($row[11]);
+		$this->setInstitution($row[12]);
+		$this->setAddress($row[13]);
+		$this->setCountry($row[14]);
+		$this->setPhone($row[15]);
+		$this->setFax($row[16]);
+		$this->setPaid($row[17]);
+		$this->setPaymentCode($row[18]);
+		$this->setTravel($row[19]);
+		$this->setTraveltext($row[20]);
+		$this->setAccommodation($row[21]);
+		$this->setAccommodationtext($row[22]);
+		$this->setRegistration($row[23]);
+		$this->setRegistrationtext($row[24]);
+		$this->setComments($row[25]);
+		
+		return true;
+	}
+	
+	function initByCode($code,$usertable) {
+		global $db;
+		 
+		$this->setCode($code);
+		$this->setUsertable($usertable);
+		
+		if($this->code==null || $this->validCode()==false)
+			return false;
+		$sql = "SELECT id, username, passwd, email, DATE_FORMAT(date, '%d/%m/%Y'), status, confirmed, code,surname, middlename, familyname, title, institution, address, country, phone, fax, paid, paymentcode, travel, traveltext, accommodation, accommodationtext, registration, registrationtext, comments FROM ".$this->usertable." WHERE code='".$this->code."'";
+		
+		$row = $db->getRow($sql);
+		if (DB::isError($row)) {
+			die ($row->getMessage());
+		}
+		
+		$this->setId($row[0]);
+		$this->setUsername($row[1]);
+		$this->passwd = $row[2];
+		$this->setEmail($row[3]);
+		$this->setDate($row[4]);
+		$this->setStatus($row[5]);
+		$this->setConfirmed($row[6]);
+		$this->setCode($row[7]);
+		$this->setSurname($row[8]);
+		$this->setMiddlename($row[9]);
+		$this->setFamilyname($row[10]);
+		$this->setTitle($row[11]);
+		$this->setInstitution($row[12]);
+		$this->setAddress($row[13]);
+		$this->setCountry($row[14]);
+		$this->setPhone($row[15]);
+		$this->setFax($row[16]);
+		$this->setPaid($row[17]);
+		$this->setPaymentCode($row[18]);
+		$this->setTravel($row[19]);
+		$this->setTraveltext($row[20]);
+		$this->setAccommodation($row[21]);
+		$this->setAccommodationtext($row[22]);
+		$this->setRegistration($row[23]);
+		$this->setRegistrationtext($row[24]);
+		$this->setComments($row[25]);
+		
+		return true;
+	}
+	
+	function initByPaymentCode($code,$usertable) {
+		global $db;
+		
+		$this->setPaymentCode($code);
+		$this->setUsertable($usertable);
+		
+		if($this->paymentCode==null || $this->validPaymentCode()==false)
+			return false;
+			
+		$sql = "SELECT id, username, passwd, email, DATE_FORMAT(date, '%d/%m/%Y'), status, confirmed, code,surname, middlename, familyname, title, institution, address, country, phone, fax, paid, paymentcode, travel, traveltext, accommodation, accommodationtext, registration, registrationtext, comments FROM ".$this->usertable." WHERE paymentcode=\"".$this->paymentCode."\"";
+		$row = $db->getRow($sql);
+		if (DB::isError($row)) {
+			die ($row->getMessage());
+		}
+		
+		$this->setId($row[0]);
+		$this->setUsername($row[1]);
+		$this->passwd = $row[2];
+		$this->setEmail($row[3]);
+		$this->setDate($row[4]);
+		$this->setStatus($row[5]);
+		$this->setConfirmed($row[6]);
+		$this->setCode($row[7]);
+		$this->setSurname($row[8]);
+		$this->setMiddlename($row[9]);
+		$this->setFamilyname($row[10]);
+		$this->setTitle($row[11]);
+		$this->setInstitution($row[12]);
+		$this->setAddress($row[13]);
+		$this->setCountry($row[14]);
+		$this->setPhone($row[15]);
+		$this->setFax($row[16]);
+		$this->setPaid($row[17]);
+		$this->setPaymentCode($row[18]);
+		$this->setTravel($row[19]);
+		$this->setTraveltext($row[20]);
+		$this->setAccommodation($row[21]);
+		$this->setAccommodationtext($row[22]);
+		$this->setRegistration($row[23]);
+		$this->setRegistrationtext($row[24]);
+		$this->setComments($row[25]);
+		
+		return true;
+		
+	}
+	
+	function sendForgotEmail($title, $name, $email, $website, $pw, $changepage) {
+	if($this->surname=="")
+		$sname = $this->username;
+	else
+		$sname = $this->surname;
+		mail($this->email, $title, "Dear ".$sname.",
+
+Your password is changed to:
+".$pw."
+
+Click on this link to change your password:
+".$website.$changepage."
+
+Regards,
+".$name."
+
+".$website."
+", "From: ".$name."<".$email.">\nReturn-path: ".$email."");
+	}
+	
+	function sendActivatedEmail($title, $name, $email, $website) {
+		mail($this->email, $title, "Dear ".$this->username.",
+
+Your account is successfully activated.
+
+Regards,
+".$name."
+
+".$website."
+", "From: ".$name."<".$email.">\nReturn-path: ".$email."");
+	}
+	
+	function sendConfirmationEmail($title, $name, $email, $website, $confirmpage, $pw) {
+	if($this->surname=="")
+		$sname = $this->username;
+	else
+		$sname = $this->surname;
+		mail($this->email, $title, "Dear ".$sname.",
+
+You are successfully registered on our website.
+
+Username: ".$this->username."
+Password: ".$pw."
+
+To activate, visit this page:
+".$website.$confirmpage."?code=".$this->getCode()."
+
+Regards,
+".$name."
+
+".$website."
+", "From: ".$name."<".$email.">\nReturn-path: ".$email."");
+	}
+	
+	function sendConferenceAbstract($title, $name, $email, $website, $paymentpage) {
+	if($this->surname=="")
+		$sname = $this->username;
+	else
+		$sname = $this->surname;
+	if($this->paid)
+		$pay = "";
+	else
+		$pay = "Click on this link to pay for the conference and complete the registration: ".$website.$paymentpage;
+		mail($this->email, $title, "Dear ".$sname.",
+
+Your abstract is successfully added.
+
+".$pay."
+
+Regards,
+".$name."
+
+".$website."
+", "From: ".$name."<".$email.">\nReturn-path: ".$email."");
+	}
+	
+	function sendConferenceRegister($title, $name, $email, $website, $pw, $paymentpage, $abstractpage) {
+	if($this->surname=="")
+		$sname = $this->username;
+	else
+		$sname = $this->surname;
+		mail($this->email, $title, "Dear ".$sname.",
+
+You are successfully registered for the conference.
+
+Username: ".$this->username."
+Password: ".$pw."
+
+Click on this link to pay for the conference and complete the registration:
+".$website.$paymentpage."
+
+To add an abstract use this link:
+".$website.$abstractpage."
+
+Regards,
+".$name."
+
+".$website."
+", "From: ".$name."<".$email.">\nReturn-path: ".$email."");
+	}
+	
+	function sendConferencePaymentinfo($title, $name, $email, $website, $abstractpage, $paypage) {
+	if($this->surname=="")
+		$sname = $this->username;
+	else
+		$sname = $this->surname;
+		mail($this->email, $title, "Dear ".$sname.",
+
+Your conference payment information is successfully added.
+
+To pay and finish your registration, use this link:
+".$website.$paypage."
+
+To add an abstract use this link:
+".$website.$abstractpage."
+
+Regards,
+".$name."
+
+".$website."
+", "From: ".$name."<".$email.">\nReturn-path: ".$email."");
+	}
+	
+	function sendConferencePayment($title, $name, $email, $website, $abstractpage) {
+	if($this->surname=="")
+		$sname = $this->username;
+	else
+		$sname = $this->surname;
+		mail($this->email, $title, "Dear ".$sname.",
+
+Your conference payment and registration is successfully handled.
+
+To add an abstract use this link:
+".$website.$abstractpage."
+
+Regards,
+".$name."
+
+".$website."
+", "From: ".$name."<".$email.">\nReturn-path: ".$email."");
+	}
+	
+	
+	//Statische methode
+	function getUserById($id,$usertable) {
+		global $db;
+	
+		$sql = "SELECT id, username, passwd, email, DATE_FORMAT(date, '%d/%m/%Y'), status, confirmed, code, surname, middlename, familyname, title, institution, address, country, phone, fax, paid, paymentcode, travel, traveltext, accommodation, accommodationtext, registration, registrationtext, comments FROM ".$usertable." WHERE id=".$id;
+		$row = $db->getRow($sql);
+		if (DB::isError($row)) {
+			die ($row->getMessage());
+		}
+		
+		$user = new User;
+		$user->setId($row[0]);
+		$user->setUsername($row[1]);
+		$user->passwd = $row[2];
+		$user->setEmail($row[3]);
+		$user->setDate($row[4]);
+		$user->setStatus($row[5]);
+		$user->setConfirmed($row[6]);
+		$user->setCode($row[7]);
+		$user->setSurname($row[8]);
+		$user->setMiddlename($row[9]);
+		$user->setFamilyname($row[10]);
+		$user->setTitle($row[11]);
+		$user->setInstitution($row[12]);
+		$user->setAddress($row[13]);
+		$user->setCountry($row[14]);
+		$user->setPhone($row[15]);
+		$user->setFax($row[16]);
+		$user->setPaid($row[17]);
+		$user->setPaymentCode($row[18]);
+		$user->setTravel($row[19]);
+		$user->setTraveltext($row[20]);
+		$user->setAccommodation($row[21]);
+		$user->setAccommodationtext($row[22]);
+		$user->setRegistration($row[23]);
+		$user->setRegistrationtext($row[24]);
+		$user->setComments($row[25]);
+		
+		return $user;
+	}
+	
+	//statische methode
+	function getAllUsers($usertable) {
+		global $db;
+		
+		$sql = "SELECT id, username, passwd, email, DATE_FORMAT(date, '%d/%m/%Y'), status, confirmed, code, surname, middlename, familyname, title, institution, address, country, phone, fax, paid, paymentcode, travel, traveltext, accommodation, accommodationtext, registration, registrationtext, comments FROM ".$usertable." ORDER BY username";
+		$result = $db->query($sql);
+		if (DB::isError($result)) {
+			die ($result->getMessage());
+		}
+		
+		$usersarray = array();
+		
+		while($row = $result->fetchrow()) {
+			$user = new User;
+			$user->setId($row[0]);
+			$user->setUsername($row[1]);
+			$user->passwd = $row[2];
+			$user->setEmail($row[3]);
+			$user->setDate($row[4]);
+			$user->setStatus($row[5]);
+			$user->setConfirmed($row[6]);
+			$user->setCode($row[7]);
+			$user->setSurname($row[8]);
+			$user->setMiddlename($row[9]);
+			$user->setFamilyname($row[10]);
+			$user->setTitle($row[11]);
+			$user->setInstitution($row[12]);
+			$user->setAddress($row[13]);
+			$user->setCountry($row[14]);
+			$user->setPhone($row[15]);
+			$user->setFax($row[16]);
+			$user->setPaid($row[17]);
+			$user->setPaymentCode($row[18]);
+			$user->setTravel($row[19]);
+			$user->setTraveltext($row[20]);
+			$user->setAccommodation($row[21]);
+			$user->setAccommodationtext($row[22]);
+			$user->setRegistration($row[23]);
+			$user->setRegistrationtext($row[24]);
+			$user->setComments($row[25]);
+			$usersarray[] = $user;
+		}
+		
+		return $usersarray;
+	}
+	
+	//statische methode
+	function getPaidUsers($usertable,$paid) {
+		global $db;
+		
+		$sql = "SELECT id, username, passwd, email, DATE_FORMAT(date, '%d/%m/%Y'), status, confirmed, code, surname, middlename, familyname, title, institution, address, country, phone, fax, paid, paymentcode, travel, traveltext, accommodation, accommodationtext, registration, registrationtext, comments FROM ".$usertable." WHERE paid='".$paid."' ORDER BY username";
+		$result = $db->query($sql);
+		if (DB::isError($result)) {
+			die ($result->getMessage());
+		}
+		
+		$usersarray = array();
+		
+		while($row = $result->fetchrow()) {
+			$user = new User;
+			$user->setId($row[0]);
+			$user->setUsername($row[1]);
+			$user->passwd = $row[2];
+			$user->setEmail($row[3]);
+			$user->setDate($row[4]);
+			$user->setStatus($row[5]);
+			$user->setConfirmed($row[6]);
+			$user->setCode($row[7]);
+			$user->setSurname($row[8]);
+			$user->setMiddlename($row[9]);
+			$user->setFamilyname($row[10]);
+			$user->setTitle($row[11]);
+			$user->setInstitution($row[12]);
+			$user->setAddress($row[13]);
+			$user->setCountry($row[14]);
+			$user->setPhone($row[15]);
+			$user->setFax($row[16]);
+			$user->setPaid($row[17]);
+			$user->setPaymentCode($row[18]);
+			$user->setTravel($row[19]);
+			$user->setTraveltext($row[20]);
+			$user->setAccommodation($row[21]);
+			$user->setAccommodationtext($row[22]);
+			$user->setRegistration($row[23]);
+			$user->setRegistrationtext($row[24]);
+			$user->setComments($row[25]);
+			$usersarray[] = $user;
+		}
+		
+		return $usersarray;
+	}
+	
+	//statische methode
+	function getUsersRange($start, $limit, $usertable) {
+		global $db;
+		
+		$sql = "SELECT id, username, passwd, email, DATE_FORMAT(date, '%d/%m/%Y'), status, confirmed, code, surname, middlename, familyname, title, institution, address, country, phone, fax, paid, paymentcode, travel, traveltext, accommodation, accommodationtext, registration, registrationtext, comments FROM ".$usertable." ORDER BY surname, username, middlename, familyname LIMIT ".$start.",".$limit;
+		$result = $db->query($sql);
+		if (DB::isError($result)) {
+			die ($result->getMessage());
+		}
+		
+		$usersarray = array();
+		
+		while($row = $result->fetchrow()) {
+			$user = new User;
+			$user->setId($row[0]);
+			$user->setUsername($row[1]);
+			$user->passwd = $row[2];
+			$user->setEmail($row[3]);
+			$user->setDate($row[4]);
+			$user->setStatus($row[5]);
+			$user->setConfirmed($row[6]);
+			$user->setCode($row[7]);
+			$user->setSurname($row[8]);
+			$user->setMiddlename($row[9]);
+			$user->setFamilyname($row[10]);
+			$user->setTitle($row[11]);
+			$user->setInstitution($row[12]);
+			$user->setAddress($row[13]);
+			$user->setCountry($row[14]);
+			$user->setPhone($row[15]);
+			$user->setFax($row[16]);
+			$user->setPaid($row[17]);
+			$user->setPaymentCode($row[18]);
+			$user->setTravel($row[19]);
+			$user->setTraveltext($row[20]);
+			$user->setAccommodation($row[21]);
+			$user->setAccommodationtext($row[22]);
+			$user->setRegistration($row[23]);
+			$user->setRegistrationtext($row[24]);
+			$user->setComments($row[25]);
+			$usersarray[] = $user;
+		}
+		
+		return $usersarray;
+	}
+	
+	
+	
+	//statische methode
+	function setPaidById($id, $usertable) {
+		$user = new ConferenceUser();
+		$ok = $user->initById($code,$usertable);
+		if($ok) {
+			$user->setPaid(true);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	//statische methode
+	function setPaidByCode($code, $usertable) {
+		$user = new ConferenceUser();
+		$ok = $user->initByPaymentCode($code,$usertable);
+		if($ok) {
+			$user->setPaid(true);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	//statische methode
+	function usernameExists($username,$usertable) {
+		global $db;
+		
+		$numrows = $db->getOne("SELECT count(*) FROM ".$usertable." WHERE username='".$username."'");
+		
+		if($numrows==1)
+			return true;
+		else
+			return false;
+	}
+	
+	
+
+}

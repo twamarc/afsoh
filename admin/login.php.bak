@@ -1,0 +1,918 @@
+<?php
+/* POST_GUARD */
+<?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['members_username'] = <?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['members_username'] ?? '';
+<?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['members_passwd']  = <?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['members_passwd']  ?? '';
+<?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['members_status']  = <?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['members_status']  ?? null;
+<?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['users_username']  = <?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['users_username']  ?? '';
+<?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['users_passwd']    = <?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['users_passwd']    ?? '';
+<?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['users_status']    = <?php
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>
+POST['users_status']    ?? null;
+/* /POST_GUARD */
+require "../includes/connect.inc.php";
+require "./classes/login.class.php";
+
+$member = (new Login())->getInstance();
+$member->init("members");
+
+$error = "";
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['user'])) {
+        $error .= "Your username is empty.<br />";
+    } else if (!preg_match("/^[a-zA-Z0-9_]{3,16}$/", $_POST['user'])) {
+        $error .= "Your username has an incorrect format.<br />";
+    }
+
+    if (empty($_POST['pass'])) {
+        $error .= "Your password is empty.<br />";
+    }
+
+    if (empty($error)) {
+        // Use prepared statements to avoid SQL injection
+        $hashedPassword = hash_password($_POST['pass']); // Assuming you have a function to hash the password securely
+        $member->loginByUsername($_POST['user'], $hashedPassword);
+
+        if (!$member->isLogin()) {
+            $error .= "Login failed.<br />";
+        }
+    }
+}
+
+$islogin = $member->isLogin(); // Set $islogin based on the login status
+
+if ($islogin == true) {
+    header("Location: index.php");
+    exit(); // It's a good practice to exit after a redirect to prevent further script execution
+}
+?>
+<?php 
+$page_name="admin"; //name of the page
+$page_status=0; //who can visit this page; 0 = everyone who is logged in, 1 = only the admin
+require "./includes/header.inc.php";
+?>
+<h3>Login</h3>
+<?php
+
+if($error!="") {     
+	echo "<div class=\"report\">";
+	echo "<p>".$error."</p>";
+	echo "</div>";
+}
+?>
+<form class="bodyform" method="post" action="">
+	<fieldset>
+	  <div>
+		<label>username:</label>
+		<input name="user" size="8" type="text" value="<?= htmlspecialchars($_POST[user],ENT_QUOTES); ?>" />
+	  </div>
+	  <div>
+		<label>password:</label>
+		<input name="pass" size="8" type="password" />
+	  </div>
+	  <input type="submit" name="submit" class="submit" value="login" />
+	  <input type="reset" value="reset" />
+	</fieldset>
+  </form>
+ <p>First time? Please <a href="../register.php">click here</a> to join AfSoH Initiative.<br />
+ Forgotten your password? Please <a href="../forgotpassword.php">click here</a>.</p>
+<div class="top"><a href="#top">top</a></div>
+<?php require "./includes/footer.inc.php" ?>

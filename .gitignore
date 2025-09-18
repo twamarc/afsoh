@@ -1,0 +1,8 @@
+﻿vendor/
+error_log
+.env
+*.log
+node_modules/
+.ipynb_checkpoints/
+# Docker volumes locaux
+dbdata/

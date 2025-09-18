@@ -1,0 +1,44 @@
+﻿<?php
+require_once __DIR__ . '/bootstrap.php'; 
+		if($islogin!=true) { //als je niet op een loginpagina bent
+			require_once ('../includes/connect.inc.php');
+			require_once ('./classes/login.class.php');
+			$login = (new Login())->getInstance();
+			$login->init("users");
+			if(($login->isLogin()==false || !$login->hasStatus($page_status)) && $page_name!="no permission")
+				header("location: nopermission.php");
+		}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl">
+<head>
+	<?php
+require_once __DIR__ . '/bootstrap.php';
+	if($page_title!="")
+		echo "<title>AfSoH - ".$page_title."</title>";
+	else
+		echo "<title>AfSoH</title>";
+	?>
+<style type="text/css">@import url(../css/style.css);</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="Pan-African Society of Hypertension, Twagirumukiza Marc, IFHA,International Forum, Hypertension control,PASH, Hypertension, Africa, 
+Hydrochrolothiazide, Enalapril,blood pressure, blacks, sub-saharan africa, STEPwise survey, European society of hypertension, European society of cardiology, Internationa
+society of hypertension, ISH, World Hypertension Ligue, World hypertension day, societe francaise de cardiologie, cardiovascular disease,CVD,
+World Action On Salt and Health, WASH, Non communicable diseases, hypertension in blacks, arterial stiffness, PASCAR" />
+<meta name="DESCRIPTION" content="Pan-African Society of Hypertension(PASH Inc.) Initiative" />
+<meta name="COPYRIGHT" content="AfSoH" />
+<meta http-equiv="CONTENT-LANGUAGE" content="English" />
+<meta name="RATING" content="General" />
+<meta name="ROBOTS" content="index,follow" />
+<meta name="REVISIT-AFTER" content="30 days" />
+<link rel="shortcut icon" href="favicon.ico" />
+</head>
+<body>
+<a name="top" id="top"></a>
+<div id="header">
+</div>
+<div id="headertext">
+<h2>The African Society of Hypertension(AfSoH)Initiative welcomes you all on its new website</h2>
+</div>
+<div id="bigcontent">

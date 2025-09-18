@@ -1,0 +1,213 @@
+<?php
+
+class News {
+
+    var $title;
+    var $date;
+    var $message;
+    var $id;
+
+    function save() {
+        global $db;
+        $date = preg_replace("/(.*)\/(.*)\/(.*)/", "\\3-\\2-\\1", $this->date);
+        $sql = "INSERT INTO news (title, date, message) VALUES ('" . addslashes($this->title) . "','" . $date . "','" . addslashes($this->message) . "')";
+        $result = $db->query($sql);
+        if (DB::isError($result)) {
+            die($result->getMessage());
+        }
+        return true;
+    }
+
+    function update() {
+        global $db;
+
+        if ($this->id != "") {
+            $date = preg_replace("/(.*)\/(.*)\/(.*)/", "\\3-\\2-\\1", $this->date);
+            $sql = "UPDATE news SET title = '" . addslashes($this->title) . "', date = '" . $date . "', message = '" . addslashes($this->message) . "' WHERE id=" . $this->id . "";
+            $result = $db->query($sql);
+            if (DB::isError($result)) {
+                die($result->getMessage());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    function delete() {
+        global $db;
+
+        if ($this->id != "") {
+            $sql = "DELETE FROM news WHERE id=" . $this->id . "";
+            $result = $db->query($sql);
+            if (DB::isError($result)) {
+                die($result->getMessage());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    function validId() {
+        global $db;
+
+        $numrows = $db->getOne("SELECT count(*) FROM news WHERE id=" . $this->id);
+
+        if ($numrows == 1)
+            return true;
+        else
+            return false;
+    }
+
+    //$this->title, $this->date en $this->message worden uit de database gehaald
+    function init($id) {
+        global $db;
+
+        $this->setId($id);
+
+        if ($this->id == null || $this->validId() == false)
+            return false;
+        $sql = "SELECT id, title, DATE_FORMAT(date, '%d/%m/%Y'), message FROM news WHERE id=" . $this->id;
+        $row = $db->getRow($sql);
+        if (DB::isError($row)) {
+            die($row->getMessage());
+        }
+
+        $this->setTitle($row[1]);
+        $this->setDate($row[2]);
+        $this->setMessage($row[3]);
+
+        return true;
+    }
+
+    function setTitle($title) {
+        $this->title = $title;
+    }
+
+    function getTitle() {
+        return $this->title;
+    }
+
+    function setDate($date) {
+        $this->date = $date;
+    }
+
+    function getDate() {
+        return $this->date;
+    }
+
+    function setMessage($message) {
+        $this->message = $message;
+    }
+
+    function getMessage() {
+        return $this->message;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    //statische methode
+    function getLastMessages($number) {
+        global $db;
+
+        // Validate $number to prevent SQL injection
+        $number = intval($number);
+
+        // Use prepared statement to avoid SQL injection
+        $stmt = $db->prepare("SELECT id, title, DATE_FORMAT(`date`, '%d/%m/%Y'), message FROM news ORDER BY `date` DESC LIMIT :limit");
+		$stmt->bindValue(':limit', intval($number), PDO::PARAM_INT);
+        $stmt->execute();
+
+        $newsarray = array();
+
+        // Assuming News class is defined and properly included
+        while ($row = $stmt->fetch()) {
+            $news = new News();
+            $news->setId($row[0]);
+            $news->setTitle($row[1]);
+            $news->setDate($row[2]);
+            $news->setMessage($row[3]);
+            $newsarray[] = $news;
+        }
+
+        return $newsarray;
+    }
+
+    //statische methode
+    function getAllMessages() {
+        global $db;
+
+        $sql = "SELECT id, title, DATE_FORMAT(date, '%d/%m/%Y'), message FROM news ORDER BY date DESC";
+        $result = $db->query($sql);
+        if (DB::isError($result)) {
+            die($result->getMessage());
+        }
+
+        $newsarray = array();
+
+        while ($row = $result->fetchrow()) {
+            $news = new News;
+            $news->setId($row[0]);
+            $news->setTitle($row[1]);
+            $news->setDate($row[2]);
+            $news->setMessage($row[3]);
+            $newsarray[] = $news;
+        }
+
+        return $newsarray;
+    }
+
+    //statische methode
+    function getMessagesRange($start, $limit) {
+        global $db;
+
+        $sql = "SELECT id, title, DATE_FORMAT(date, '%d/%m/%Y'), message FROM news ORDER BY date DESC LIMIT " . $start . "," . $limit;
+        $result = $db->query($sql);
+        if (DB::isError($result)) {
+            die($result->getMessage());
+        }
+
+        $newsarray = array();
+
+        while ($row = $result->fetchrow()) {
+            $news = new News;
+            $news->setId($row[0]);
+            $news->setTitle($row[1]);
+            $news->setDate($row[2]);
+            $news->setMessage($row[3]);
+            $newsarray[] = $news;
+        }
+
+        return $newsarray;
+    }
+
+    //statische methode
+    //past het nieuwsbericht aan zodat het goed wordt weergegeven op de website
+    function transform($message) {
+        $message = preg_replace('/alt="[ ]+"/', 'alt=""', $message); //alt-tekst met enkel spaties in leegmaken
+        $message = preg_replace('/<img( title="[^"]*" [^s]*)src="\.\.\/([^"]*)"([^>]*)>/', '<img\\1src="\\2"\\3>', $message); // "../" vooraan url van een afbeelding verwijderen
+        $message = preg_replace('/<img( title="[^"]*" [^s]*)src="([^"]*)th\/([^"]*)"([^>]*)>/', '<a href="\\2show/\\3"  rel="lightbox">\\0</a>', $message); // als je op thumb klikt zie je grote afbeelding
+        $message = str_replace('jscripts/tiny_mce/plugins/emotions/img', 'admin/jscripts/tiny_mce/plugins/emotions/img', $message); ///smilies goed laten weergeven
+
+        return $message;
+    }
+
+    //statische methode
+    //voor het semi-dynamisch maken van nieuwsitems
+    function php2html($start, $target) {
+        $staticdata = shell_exec("php -f " . $start);
+
+        $tempfile = fopen($target, 'w');
+        if (!$tempfile) {
+            die("Unable to create $dyn_file. Static Page Update aborted");
+        }
+        fwrite($tempfile, $staticdata);
+        fclose($tempfile);
+    }
+}
+?>

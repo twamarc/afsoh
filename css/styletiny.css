@@ -1,0 +1,350 @@
+body {
+   	margin: 0px 0px 0px 0px;
+   	background-color: #FFFFFF;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+}
+
+a {
+	color: #7f9025;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #7f9025;
+	text-decoration: underline;
+}
+
+p {
+	margin: 5px 0px 8px 0px;
+}
+
+img {
+	float: left;
+	margin: 5px 5px 5px 5px;
+}
+
+
+#menu {
+	width: 896px;
+	height: 43px;
+	margin: 0px auto 0px auto;
+	padding: 0px 2px 0px 2px;
+	border-bottom: 3px solid #96ab2b;
+}
+
+#menu ul {
+	line-height: normal;
+	margin: 0px 0px 0px 0px;
+	padding: 15px 0px 0px 20px;
+	list-style: none;
+}
+
+#menu ul li {
+	float: left;
+}
+
+#menu #active {
+	background-color:  #96ab2b;
+}
+
+#menu a {
+	display: block;
+	margin: 0px 3px 0px 3px;
+	padding: 5px 15px 10px 15px;
+	text-decoration: none;
+	color: #FFFFFF;
+	border: none;
+}
+
+#menu a:hover {
+	background: #96ab2b;
+	text-decoration: none;
+}
+
+#header {
+	width: 900px;
+	height: 200px;
+	background: #664f1a url(../images/header.jpg) no-repeat top;
+	border-left: 1px solid #664f1a;
+	border-right: 1px solid #664f1a;
+	margin: 0px auto 0px auto;
+	padding: 0px 0px 0px 0px;
+}
+
+#header img {
+	padding: 0px 80px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	float: left;
+}
+
+#header h1 {
+	padding: 65px 0px 0px 0px;
+	font-size: 2.8em;
+	font-weight: bold;
+	color: #584416;
+	margin: 0px 0px 0px 450px;
+	font-family: Arial, Georgia, "Times New Roman", Times, serif;
+}
+
+#header h1 a {
+	text-decoration: none;
+	color: #584416;
+}
+
+#header h2 {
+	padding: 15px 0px 0px 0px;
+	font-size: 12px;
+	margin: 0px 0px 0px 340px;
+	font: normal 13px Georgia, "Times New Roman", Times, serif;
+	font-style: italic;
+}
+
+#bigcontent {
+	background: #FFFFFF url(../images/bottom.gif) repeat-x bottom;
+	border-left: 1px solid #664f1a;
+	border-right: 1px solid #664f1a;
+	margin: 0px auto 0px auto;
+	overflow: hidden;
+	width: 850px;
+	padding: 20px 25px 20px 25px;
+}
+
+#bigcontent p {
+	margin: 8px 0px 12px 22px;
+	line-height: 25px;
+}
+
+#bigcontent h3 {
+	padding: 0px 0px 0px 10px;
+	border-left: 4px solid #96ab2b;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 2em;
+	font-weight: normal;
+	margin: 0px 0px 15px 0px;
+}
+
+#bigcontent h4 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	padding: 10px 0px 5px 0px;
+	margin: 0px 0px 0px 0px;
+	font-weight: bold;
+}
+
+#bigcontent .date {
+	font-style: italic;
+}
+
+.report {
+	background-color: #c8d390;
+	color: #000000;
+	font-weight: bold;
+	padding: 1px 10px 1px 10px;
+}
+
+.report a {
+	color: #363636;
+	text-decoration: none;
+}
+
+.report a:hover {
+	color: #363636;
+	text-decoration: underline;
+}
+
+.top {
+	margin: 20px 0px 40px 0px;
+	padding: 5px 20px 5px 20px;
+	text-align: right;
+	background: #c8d390 url(../images/top.jpg) right center no-repeat;
+}
+
+.top a {
+	font-size: 11px;
+	text-decoration: none;
+	color: #664f1a;
+}
+	
+#content {
+	background: #FFFFFF url(../images/bottom.gif) repeat-x bottom;
+	border-left: 1px solid #664f1a;
+	border-right: 1px solid #664f1a;
+	margin: 0px auto 0px auto;
+	overflow: hidden;
+	width: 900px;
+	padding: 20px 0px 0px 0px;
+}
+
+#left {
+	float: left;
+	width: 190px;
+	padding: 30px 20px 50px 20px;
+}
+
+#left ul {
+	line-height: normal;
+	margin: 0px 0px 0px 0px;
+	padding: 10px 0px 0px 0px;
+	list-style: none;
+}
+
+#left ul li {
+	padding: 10px 10px 10px 10px;
+	border-bottom: 1px dashed #9b8c6a;
+}
+
+#left a {
+	text-decoration: none;
+	color: #664f1a;
+}
+
+#left a:hover {
+	text-decoration: underline;
+	color: #664f1a;
+}
+
+#right {
+	float: left;
+	width: 625px;
+	padding: 10px 25px 20px 20px;
+}
+
+#right p {
+	margin: 8px 0px 12px 22px;
+	line-height: 25px;
+}
+
+#right h3 {
+	padding: 0px 0px 0px 10px;
+	border-left: 4px solid #96ab2b;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 2em;
+	font-weight: normal;
+	margin: 0px 0px 15px 0px;
+}
+
+#footer {
+	width: 902px;
+	height: 45px;
+	margin: 0px auto 0px auto;
+	padding: 20px 0 15px 0;
+	background: #664f1a;
+	color: #FFFFFF;
+}
+
+#footer p {
+	margin: 0px 0px 10px 0px;
+	font-size: 9px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+#footer a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#footer a:hover {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+.search {
+	border: 1px solid black;
+	padding: 4px;
+	width: 20em;
+}
+
+img.left {
+	float: left;
+	margin: 13px 15px 5px 5px;
+}
+
+img.right {
+	float: right;
+	margin: 13px 5px 5px 15px;
+}
+
+img.rightsmall {
+	float: right;
+	margin: 0px 0px 0px 10px;
+}
+
+img.leftmall {
+	float: left;
+	margin: 0px 10px 0px 0px;
+}
+
+
+form.bodyform { margin: 0; padding: 10px 0; width: auto;}
+.bodyform fieldset { border-width: 0px 0px 0px 0px;  padding: 10px; margin: 0; line-height:normal; }
+.bodyform fieldset legend { font-size: 1.1em; font-weight: bold; color: #A5A5A5; margin: 0; padding: 0 5px; }
+.bodyform input, .bodyform select, .bodyform textarea { font-family: Verdana, Arial, sans-serif; font-size: 100%; color: #000; }
+.bodyform textarea { overflow: auto;}
+.bodyform div { display: block; width: 354px; margin: 5px 0 0; padding: 1px 3px; clear: left;}
+.bodyform div fieldset { clear:none; border: 1px solid #999; margin: 0 0 0 142px; padding: 8px; width: 188px;}
+.bodyform div fieldset.wide { clear:none; border: 1px solid #999; margin: 0 0 0 5px; padding: 8px; width: 300px;}
+.bodyform div fieldset legend { font-size: 100%; padding: 0 3px 0 9px;}
+.bodyform div label { display: block; float: left; width: 130px; padding: 3px 5px; margin: 0 0 5px 0; text-align: right; }
+.bodyform div label.labelCheckbox, .bodyform div label.labelRadio { float: none; display: block; width: 188px; padding: 0; margin: 5px 0; text-align: left;}
+.bodyform div label.labelCheckboxwide, .bodyform div label.labelRadiowide { float: none; display: block; width: 300px; padding: 0; margin: 5px 0; text-align: left;}
+.bodyform div input, .bodyform div select, .bodyform div textarea { width: 200px; padding: 1px 3px; margin: 0; }
+.bodyform div input.wide, .bodyform div select.wide, .bodyform div textarea.wide { width: 320px; padding: 1px 3px; margin: 0; }
+.bodyform input.inputCheckbox, .bodyform input.inputRadio {
+  display: inline; height: 14px; width: 14px; border-width: 0; padding: 0;}
+.bodyform input.inputText { }	
+.bodyform textarea.inputTextarea { }	
+.bodyform select.selectOne { }	
+.bodyform select.selectMultiple { }	
+.bodyform input.inputButton {background-color: #ccc; color: #000; width: auto; padding: 0 6px; float: right; margin: 0 0 0 5px;}
+.bodyform div small { display: block; margin: 0 0 5px 142px; padding: 1px 3px; font-size: 85%;}
+.bodyform div small.wide { display: block; margin: 0 0 5px 5px; padding: 1px 3px; font-size: 85%;}
+.bodyform .submit { margin: 10px 0px 0px 150px; }
+
+form.bodyformlarge { margin: 0; padding: 10px 0; width: auto;}
+.bodyformlarge fieldset { border-width: 0px 0px 0px 0px;  padding: 10px; margin: 0; line-height:normal; }
+.bodyformlarge fieldset legend { font-size: 1.1em; font-weight: bold; color: #A5A5A5; margin: 0; padding: 0 5px; }
+.bodyformlarge input, .bodyformlarge select, .bodyformlarge textarea { font-family: Verdana, Arial, sans-serif; font-size: 100%; color: #000; }
+.bodyformlarge textarea { overflow: auto;}
+.bodyformlarge div { display: block; width: 100%; margin: 5px 0 0; padding: 1px 3px; clear: left;}
+.bodyformlarge div fieldset { clear:none; border: 1px solid #999; margin: 0 0 0 142px; padding: 8px; width: 188px;}
+.bodyformlarge div fieldset.wide { clear:none; border: 1px solid #999; margin: 0 0 0 5px; padding: 8px; width: 300px;}
+.bodyformlarge div fieldset legend { font-size: 100%; padding: 0 3px 0 9px;}
+.bodyformlarge div label { display: block; float: left; width: 130px; padding: 3px 5px; margin: 0 0 5px 0; text-align: right; }
+.bodyformlarge div label.labelCheckbox, .bodyformlarge div label.labelRadio { float: none; display: block; width: 188px; padding: 0; margin: 5px 0; text-align: left;}
+.bodyformlarge div label.labelCheckboxwide, .bodyformlarge div label.labelRadiowide { float: none; display: block; width: 300px; padding: 0; margin: 5px 0; text-align: left;}
+.bodyformlarge div input, .bodyformlarge div select, .bodyformlarge div textarea { width: 400px; padding: 1px 3px; margin: 0; }
+.bodyformlarge div input.wide, .bodyformlarge div select.wide, .bodyformlarge div textarea.wide { width: 320px; padding: 1px 3px; margin: 0; }
+.bodyformlarge input.inputCheckbox, .bodyformlarge input.inputRadio {
+  display: inline; height: 14px; width: 14px; border-width: 0; padding: 0;}
+.bodyformlarge input.inputText { }	
+.bodyformlarge textarea.inputTextarea { }	
+.bodyformlarge select.selectOne { }	
+.bodyformlarge select.selectMultiple { }	
+.bodyformlarge input.inputButton {background-color: #ccc; color: #000; width: auto; padding: 0 6px; float: right; margin: 0 0 0 5px;}
+.bodyformlarge div small { display: block; margin: 0 0 5px 142px; padding: 1px 3px; font-size: 85%;}
+.bodyformlarge div small.wide { display: block; margin: 0 0 5px 5px; padding: 1px 3px; font-size: 85%;}
+.bodyformlarge .submit { margin: 10px 0px 0px 150px; }
+
+table tr td.newsdate {
+	width: 75px;
+}
+
+table {margin: 0px 5px 0px 0px; padding:0; width: 100%; border-collapse: collapse; border-spacing: 0; clear: left;}
+table tr td {text-align: left; border-top: 1px solid #c8d390; padding: 5px 5px 7px 8px; background-color: #FFFFFF; vertical-align:top;}
+table tr td.center {text-align: center;}
+table tr td.edit {width: 60px;}
+table tr td.edit3 {width: 120px;}
+table tr.tabelheader th,
+table tr.tabelheader td { border: 0; background-color: #c8d390; color: #664f1a; font-weight:bold;}
+table tr.subheader td { font-weight:bold; background-color: #F2F5FE; padding-top: 7px; padding-bottom: 10px; text-align: left;}
+table tr.legende td { border-top: 0; background-color: #c8d390; color: #664f1a; font-size: 11px;  text-align: left; font-weight: bold;}
+table tr.legendemiddle td { color: #A5A5A5; background-color: #363636; font-size: 11px;  text-align: left;}
+table tr.unityheader td { padding-bottom: 4px;}
+table tr.unity td {border-top: 0;}
+table tr td.unity-subheader { font-style: italic;}
+table tr td.unity-indent { padding-left: 16px;}
+table tr.bottom td { border-bottom: 1px solid #369; padding-bottom:10px;}
